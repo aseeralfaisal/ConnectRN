@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ConnectRN</string>
+    <string name="bouncer_card_scan_instructions">Fit your card in the box below</string>
+</resources>

@@ -1,0 +1,9 @@
+rootProject.name = 'ConnectRN'
+include ':react-native-cardscan'
+project(':react-native-cardscan').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cardscan/android')
+include ':react-native-cardscan'
+project(':react-native-cardscan').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cardscan/android')
+include ':react-native-cardscan'
+project(':react-native-cardscan').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cardscan/android')
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'

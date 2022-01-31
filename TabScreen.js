@@ -6,7 +6,7 @@ import Home from './Home';
 import ChatStack from './ChatStack';
 import styles from './styles/TabScreenStyles'
 import { useSelector } from 'react-redux'
-import HomeStack from './HomeStack';
+import HomeStack from './HomeStack'
 
 const Tab = createMaterialBottomTabNavigator();
 

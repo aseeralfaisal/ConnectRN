@@ -5,8 +5,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/OTPStyles'
 import axios from 'axios'
 import { db } from './backened/Firebase'
-import { collection, addDoc, query, onSnapshot, doc, orderBy } from 'firebase/firestore'
-import { useDispatch } from 'react-redux';
+// import { collection, addDoc, query, onSnapshot, doc, orderBy } from 'firebase/firestore'
+import { useDispatch, useSelector } from 'react-redux'
+import firestore from '@react-native-firebase/firestore'
+import * as actions from './redux/slice'
 
 const Stack = createStackNavigator()
 
@@ -23,7 +25,10 @@ export default function OTP({ navigation }) {
   const [verifyCode, setVerifyCode] = React.useState('')
   const [go, setGo] = React.useState(false)
 
-  const link = 'http://192.168.100.4:3001'
+  // const link = 'http://192.168.100.4:3001'
+
+  const dispatch = useDispatch()
+  const mobileNumber = useSelector((state) => state.mobileNumber)
 
   const codeNumFunc = (text) => {
     setCodeNum(text)
@@ -41,52 +46,76 @@ export default function OTP({ navigation }) {
 
   function close() { pickerRef.current.blur() }
 
+  // const codeVerification = async () => {
+  //   if (phnNumber == '') {
+  //     setPopupVisible(false)
+  //     alert('Please put a phone number')
+  //     return null
+  //   } else {
+  //     setPopupVisible(true)
+  //   }
+  //   if (phnNumber.length >= 11) {
+  //     setPhnNumber("+88" + phnNumber)
+  //     setGo(true)
+  //   }
+  // }
   const codeVerification = async () => {
     if (phnNumber == '') {
-      setPopupVisible(false)
       alert('Please put a phone number')
-      return null
     } else {
-      setPopupVisible(true)
-    }
-    if (phnNumber.length >= 11) {
-      setPhnNumber("+88" + phnNumber)
+      setPhnNumber(phnNumber)
       setGo(true)
+      // console.log(phnNumber);
     }
   }
 
+  // React.useEffect(() => {
+  //   if (go) {
+  //     (async () => {
+  //       const number = { phnNumber }
+  //       const apiTest = await axios.post(`${link}/checkverify`, number)
+  //       console.log(apiTest.data)
+  //     })()
+  //   }
+  // }, [go])
+
   React.useEffect(() => {
     if (go) {
-      (async () => {
-        const number = { phnNumber }
-        const apiTest = await axios.post(`${link}/checkverify`, number)
-        console.log(apiTest.data)
-      })()
+      firestore().collection("users").onSnapshot((snap) => {
+        if (snap.docs.map(doc => doc.data().user == phnNumber)) {
+          navigation.navigate("TabScreen")
+          snap.docs.map(doc => dispatch(actions.setMobileNumber(doc.data().user)))
+        }
+        else registerUser()
+      })
     }
   }, [go])
 
   const registerUser = async () => {
-    const addtoDB = await addDoc(collection(db, "users"), {
+    // const addtoDB = await addDoc(collection(db, "users"), {
+    //   user: phnNumber
+    // })
+    // console.log(addtoDB)
+    firestore().collection("users").add({
       user: phnNumber
     })
-    // console.log(addtoDB)
   }
 
-  const checkToken = async () => {
-    if (verifyCode == '') {
-      return null
-    }
-    const code = { verifyCode, phnNumber }
-    const apiTest = await axios.post(`${link}/checktoken`, code)
-    if (apiTest.data == 'approved') {
-      // registerUser()
-      navigation.navigate('TabScreen', {
-        currentUser: phnNumber
-      })
-    } else {
-      alert('Error Occured! Please try again.')
-    }
-  }
+  // const checkToken = async () => {
+  //   if (verifyCode == '') {
+  //     return null
+  //   }
+  //   const code = { verifyCode, phnNumber }
+  //   const apiTest = await axios.post(`${link}/checktoken`, code)
+  //   if (apiTest.data == 'approved') {
+  //     // registerUser()
+  //     navigation.navigate('TabScreen', {
+  //       currentUser: phnNumber
+  //     })
+  //   } else {
+  //     alert('Error Occured! Please try again.')
+  //   }
+  // }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">
@@ -135,7 +164,7 @@ export default function OTP({ navigation }) {
               <TextInput style={styles.codeInput} value={verifyCode} type="text" maxLength={6} onChangeText={(text) => {
                 setVerifyCode(text)
                 if (text == '' || text.length <= 0) setPopupVisible(false)
-              }} onSubmitEditing={checkToken} />
+              }} /*onSubmitEditing={checkToken}*/ />
             </View>
           </View>
         </View>

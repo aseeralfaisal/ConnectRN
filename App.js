@@ -1,49 +1,35 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-// import {Node} from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import store from './redux/store'
-import { Provider } from 'react-redux';
-import TabScreen from './TabScreen';
+import { Provider } from 'react-redux'
+import TabScreen from './TabScreen'
+import StartupStack from './StartupStack'
+import OTP from './OTP';
 
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   const Stack = createStackNavigator()
 
   return (
+    <Provider store={store}>
       <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-            initialRouteName="TabScreen"
-          >
-            <Stack.Screen name='TabScreen' component={TabScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+          initialRouteName="StartupStack"
+        >
+          <Stack.Screen name='StartupStack' component={StartupStack} />
+          <Stack.Screen name='TabScreen' component={TabScreen} />
+          <Stack.Screen name='OTP' component={OTP} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

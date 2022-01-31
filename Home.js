@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, Text, View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, Image } from 'react-native'
+import { TextInput, Text, View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, Image, Button } from 'react-native'
 import { Picker } from '@react-native-picker/picker';
 import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/HomeStyles'
@@ -12,6 +12,7 @@ import Cardscan from 'react-native-cardscan'
 const Tab = createMaterialBottomTabNavigator();
 
 export default function Home({ navigation }) {
+
   const scanner = () => {
     Cardscan.scan()
       .then(({ action, payload, canceled_reason }) => {
@@ -31,8 +32,6 @@ export default function Home({ navigation }) {
         <TouchableOpacity style={{ marginLeft: 60 }} activeOpacity={0.7} onPress={() => scanner()}>
           <Image source={require('./assets/icons/Plus.png')} style={{ height: 35, width: 35 }} />
         </TouchableOpacity>
-      </View>
-      <View>
       </View>
     </SafeAreaView>
   )

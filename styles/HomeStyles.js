@@ -41,6 +41,25 @@ export default styles = StyleSheet.create({
     textAlign: 'left',
     color: '#000'
   },
+  cardNum: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 18, marginVertical: 15, margin: 8,
+    textAlign: 'left',
+    color: '#301966'
+  },
+  cardText: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 13,
+    margin: 8,
+    textAlign: 'left',
+    color: '#000'
+  },
+  cardTextIssuer: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 13, margin: 8, fontWeight: 'bold', color: 'blue',
+    textAlign: 'left',
+    color: '#3257ce'
+  },
   whitepart: {
     backgroundColor: '#fff',
     width: '100%',

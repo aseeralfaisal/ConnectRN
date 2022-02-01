@@ -54,21 +54,21 @@ export default function Home({ navigation }) {
             return (
               <View>
                 <View style={{ backgroundColor: '#fff', width: 250, padding: 12, borderRadius: 12, marginHorizontal: 8 }}>
-                  <TouchableOpacity style={{ alignItems: 'flex-start' }}>
+                  <TouchableOpacity style={{ alignItems: 'flex-start' }} onPress={() => console.log(item.item)}>
                     <View style={{
                       display: "flex", flexDirection: 'row', justifyContent: 'space-around',
                       alignItems: 'center'
                     }}>
-                      <Text style={[styles.text, { fontSize: 13, margin: 8 }]}>Current Balance</Text>
-                      <Text style={[styles.text, { fontSize: 13, margin: 8, fontWeight: 'bold', color: 'blue' }]}>{item.item.issuer}</Text>
+                      <Text style={styles.cardText}>Current Balance</Text>
+                      <Text style={styles.cardTextIssuer}>{item.item.issuer}</Text>
                     </View>
-                    <Text style={[styles.text, { fontSize: 18, marginVertical: 15, margin: 8 }]}>{item.item.number}</Text>
+                    <Text style={styles.cardNum}>{item.item.number}</Text>
                     <View style={{
                       flexDirection: 'row', justifyContent: 'space-around',
                       alignItems: 'center'
                     }}>
-                      <Text style={[styles.text, { fontSize: 13, margin: 8 }]}>Louis Scottson</Text>
-                      <Text style={[styles.text, { fontSize: 13, margin: 8 }]}>Exp. Date 09/26</Text>
+                      <Text style={styles.cardText}>Louis Scottson</Text>
+                      <Text style={styles.cardText}>Exp. Date 09/26</Text>
                     </View>
                   </TouchableOpacity>
                 </View>

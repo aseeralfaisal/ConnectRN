@@ -16,10 +16,11 @@ export default styles = StyleSheet.create({
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 26,
     textAlign: 'left',
-    marginVertical: 20
+    marginVertical: 20,
+    color: '#000'
   },
   header: {
-    margin: 50,
+    margin: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -38,6 +39,7 @@ export default styles = StyleSheet.create({
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 30,
     textAlign: 'left',
+    color: '#000'
   },
   whitepart: {
     backgroundColor: '#fff',

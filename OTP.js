@@ -9,6 +9,7 @@ import { db } from './backened/Firebase'
 import { useDispatch, useSelector } from 'react-redux'
 import firestore from '@react-native-firebase/firestore'
 import * as actions from './redux/slice'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Stack = createStackNavigator()
 
@@ -84,7 +85,10 @@ export default function OTP({ navigation }) {
       firestore().collection("users").onSnapshot((snap) => {
         if (snap.docs.map(doc => doc.data().user == phnNumber)) {
           navigation.navigate("TabScreen")
-          snap.docs.map(doc => dispatch(actions.setMobileNumber(doc.data().user)))
+          snap.docs.map(doc => {
+            dispatch(actions.setMobileNumber(doc.data().user))
+            AsyncStorage.setItem("@mobileNumber", doc.data().user)
+          })
         }
         else registerUser()
       })

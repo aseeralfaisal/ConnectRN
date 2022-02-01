@@ -9,7 +9,8 @@ export default styles = StyleSheet.create({
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 20,
     textAlign: 'left',
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    color: '#000'
   },
   InChatHeader: {
     display: 'flex',

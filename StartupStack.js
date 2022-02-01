@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import React from 'react'
+import * as React from 'react'
 import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
@@ -11,7 +11,9 @@ import Startup3 from './StartupComponents/Startup3'
 
 const Stack = createStackNavigator()
 
+
 export default function StartupStack({ navigation }) {
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fafafa' }}>
       <Stack.Navigator

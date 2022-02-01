@@ -33,7 +33,6 @@ export default function Chat({ navigation }) {
       getUserList()
     }
   }, [])
-  // LogBox.ignoreLogs(['Setting a timer for a long period of time', 'Can\'t perform a React state update on an unmounted component'])
 
   return (
     <View style={styles.container}>

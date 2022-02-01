@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, KeyboardAvoidingView, Image } from 'react-native'
+import { View, KeyboardAvoidingView, Image, StatusBar } from 'react-native'
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Home from './Home';
@@ -14,6 +14,12 @@ export default function TabScreen({ navigation }) {
 
   return (
     <>
+      <StatusBar
+        animated={true}
+        backgroundColor="#c3c3c4"
+        barStyle="light-content"
+        showHideTransition="fade"
+        hidden={false} />
       <Tab.Navigator
         activeColor="#00AEEF"
         inactiveColor="#000"

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -7,13 +7,23 @@ import store from './redux/store'
 import { Provider } from 'react-redux'
 import TabScreen from './TabScreen'
 import StartupStack from './StartupStack'
-import OTP from './OTP';
+import OTP from './OTP'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [firstScreen, setFirstScreen] = React.useState("")
 
   const Stack = createStackNavigator()
+
+  // React.useEffect(() => {
+  //   (async () => {
+  //     const mobileNumber = await AsyncStorage.getItem("@mobileNumber")
+  //     let mNumber = Number(mobileNumber)
+  //     mNumber ? setFirstScreen("TabScreen") : setFirstScreen("StartupStack")
+  //     console.log(mNumber)
+  //   })()
+  // })
 
   return (
     <Provider store={store}>
@@ -22,7 +32,7 @@ const App = () => {
           screenOptions={{
             headerShown: false,
           }}
-          initialRouteName="StartupStack"
+          initialRouteName="TabScreen"
         >
           <Stack.Screen name='StartupStack' component={StartupStack} />
           <Stack.Screen name='TabScreen' component={TabScreen} />
